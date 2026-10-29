@@ -11,6 +11,19 @@ echo ">>> Installing dependencies"
 sudo -u cbr "$APP_DIR/venv/bin/pip" install \
     -r "$SRC/requirements.txt"
 
+echo ">>> Installing service config"
+sudo install -m 644 "$SRC/deploy/cbr-rates.service" \
+    /etc/systemd/system/cbr-rates.service
+
+sudo systemctl daemon-reload
+
+echo ">>> Installing nginx config"
+sudo install -m 644 "$SRC/deploy/nginx/cbr-rates.conf" \
+    /etc/nginx/sites-available/cbr-rates
+
+sudo nginx -t
+sudo systemctl reload nginx
+
 echo ">>> Restarting service"
 sudo systemctl restart cbr-rates
 
