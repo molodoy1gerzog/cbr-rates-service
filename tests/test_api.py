@@ -21,5 +21,3 @@ def test_rates_returns_502_when_source_unavailable(monkeypatch):
     response = client.get("/rates")
 
     assert response.status_code == 502
-
-    
