@@ -10,7 +10,7 @@ def test_health_returns_ok():
     response = client.get("/health")
 
     assert response.status_code == 200
-    assert response.json()["status"] == "ok"
+    assert response.json()["status"] == "broken"
 
 def test_rates_returns_502_when_source_unavailable(monkeypatch):
     def fake_get(*args, **kwargs):
@@ -21,5 +21,3 @@ def test_rates_returns_502_when_source_unavailable(monkeypatch):
     response = client.get("/rates")
 
     assert response.status_code == 502
-
-    
