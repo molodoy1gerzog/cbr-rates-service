@@ -1,4 +1,5 @@
 # cbr-rates-service
+![CI](https://github.com/molodoy1gerzog/cbr-rates-service/actions/workflows/ci.yml/badge.svg)
 
 HTTP API на FastAPI, который отдаёт курсы USD, EUR и CNY к рублю.
 Данные берутся из открытого JSON с курсами ЦБ РФ (cbr-xml-daily.ru).
