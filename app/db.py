@@ -2,7 +2,7 @@ import os
 from datetime import datetime
 from decimal import Decimal
 
-from sqlalchemy import DateTime, Numeric, String, create_engine, UniqueConstraint, func
+from sqlalchemy import DateTime, Numeric, String, UniqueConstraint, create_engine, func
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 DATABASE_URL = os.environ["DATABASE_URL"]
