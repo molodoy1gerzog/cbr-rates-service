@@ -24,7 +24,7 @@ app = FastAPI(title="CBR Rates", lifespan=lifespan)
 
 @app.get("/health")
 def health():
-    return {"status": "ok", "version": "0.4.0"}
+    return {"status": "ok", "version": "0.5.0"}
 
 
 @app.get("/rates")

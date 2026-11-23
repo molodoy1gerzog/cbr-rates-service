@@ -1,6 +1,7 @@
 services:
   app:
     build: .
+    image: ghcr.io/molodoy1gerzog/cbr-rates-service:latest
     restart: unless-stopped
     depends_on:
       db:

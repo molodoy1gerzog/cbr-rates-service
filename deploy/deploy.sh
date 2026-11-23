@@ -7,9 +7,10 @@ SRC="$APP_DIR/src"
 echo ">>> Updating code"
 sudo -u cbr git -C "$SRC" pull --ff-only
 
-echo ">>> Building and starting container"
+echo ">>> Pulling image and starting container"
 cd "$SRC"
-sudo docker compose up -d --build --wait --wait-timeout 120
+sudo docker compose pull app
+sudo docker compose up -d --wait --wait-timeout 120
 
 echo ">>> Installing nginx config"
 sudo install -m 644 "$SRC/deploy/nginx/cbr-rates.conf" \
