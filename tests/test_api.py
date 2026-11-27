@@ -21,3 +21,11 @@ def test_rates_returns_502_when_source_unavailable(monkeypatch):
     response = client.get("/rates")
 
     assert response.status_code == 502
+
+def test_metrics_endpoint_exposes_http_metrics():
+    client.get("/health")
+
+    response = client.get("/metrics")
+
+    assert response.status_code == 200
+    assert "http_requests_total" in response.text
