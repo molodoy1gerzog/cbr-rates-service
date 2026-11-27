@@ -2,9 +2,10 @@ import os
 from contextlib import asynccontextmanager
 from datetime import datetime
 
+from prometheus_fastapi_instrumentator import Instrumentator
+
 import httpx
 from fastapi import FastAPI, HTTPException
-from prometheus_fastapi_instrumentator import Instrumentator
 from sqlalchemy import select
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import Session
@@ -26,7 +27,7 @@ Instrumentator().instrument(app).expose(app, include_in_schema=False)
 
 @app.get("/health")
 def health():
-    return {"status": "ok", "version": "0.5.0"}
+    return {"status": "ok", "version": "0.6.0"}
 
 
 @app.get("/rates")
