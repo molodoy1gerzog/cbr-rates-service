@@ -2,10 +2,9 @@ import os
 from contextlib import asynccontextmanager
 from datetime import datetime
 
-from prometheus_fastapi_instrumentator import Instrumentator
-
 import httpx
 from fastapi import FastAPI, HTTPException
+from prometheus_fastapi_instrumentator import Instrumentator
 from sqlalchemy import select
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import Session
