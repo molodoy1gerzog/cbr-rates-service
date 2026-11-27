@@ -4,6 +4,7 @@ from datetime import datetime
 
 import httpx
 from fastapi import FastAPI, HTTPException
+from prometheus_fastapi_instrumentator import Instrumentator
 from sqlalchemy import select
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import Session
@@ -20,6 +21,7 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="CBR Rates", lifespan=lifespan)
+Instrumentator().instrument(app).expose(app, include_in_schema=False)
 
 
 @app.get("/health")
