@@ -26,7 +26,7 @@ Instrumentator().instrument(app).expose(app, include_in_schema=False)
 
 @app.get("/health")
 def health():
-    return {"status": "ok", "version": "0.5.0"}
+    return {"status": "ok", "version": "0.6.0"}
 
 
 @app.get("/rates")
