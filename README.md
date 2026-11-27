@@ -62,8 +62,12 @@ curl http://127.0.0.1:8001/rates/history
 Код на сервере лежит в `/opt/cbr-rates/src` и принадлежит пользователю `cbr`.
 Обновление выполняет скрипт `deploy/deploy.sh`:
 
+Образ собирает и публикует CI (GitHub Actions) при каждом слиянии в `main`:
+`ghcr.io/molodoy1gerzog/cbr-rates-service` с тегами `latest` и хешем коммита.
+Деплоить нужно после того, как CI для `main` стал зелёным.
+
 1. `git pull --ff-only` — получает новый код с GitHub;
-2. `docker compose up -d --build --wait` — пересобирает образ и ждёт статуса healthy;
+2. `docker compose pull app` и `docker compose up -d --wait` — скачивает готовый образ из GHCR и перезапускает контейнер;
 3. устанавливает конфиг nginx, проверяет его (`nginx -t`) и перечитывает;
 4. проверяет `/health` через nginx; при ошибке выводит логи контейнера и завершается с кодом 1.
 
