@@ -1,0 +1,29 @@
+groups:
+  - name: cbr-rates
+    rules:
+      - alert: TargetDown
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Цель {{ $labels.job }} недоступна"
+          description: "{{ $labels.instance }} не отвечает Prometheus больше минуты."
+
+      - alert: DiskSpaceLow
+        expr: node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"} * 100 < 15
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Мало места на диске"
+          description: "На {{ $labels.instance }} свободно {{ $value | printf \"%.1f\" }}% на /."
+
+      - alert: AppErrors5xx
+        expr: sum(rate(http_requests_total{job="cbr-app", status="5xx"}[5m])) > 0
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Приложение отвечает ошибками 5xx"
+          description: "cbr-app возвращает 5xx: {{ $value | printf \"%.2f\" }} запросов в секунду."
